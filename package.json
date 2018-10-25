@@ -1,0 +1,20 @@
+{
+  "name": "d1calendar",
+  "version": "1.0.6",
+  "description": "Replacement of standard HTML date inputs",
+  "main": "d1calendar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "date",
+    "datetime",
+    "datetime-local",
+    "calendar"
+  ],
+  "author": "Vadim Korolev <vadimkor@yandex.ru> (https://github.com/vvvkor)",
+  "license": "MIT",
+  "dependencies": {
+    "d1css": "^1.1"
+  }
+}
