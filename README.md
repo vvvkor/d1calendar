@@ -3,7 +3,11 @@
 Replacement for standard HTML inputs: ``date``, ``datetime-local``.  
 [Demo & Docs](http://vadimkor.ru/projects/calendar/)
 
-Requires [d1.css](https://github.com/vvvkor/d1).
+## Install
+
+```
+npm install d1calendar
+```
 
 ## Usage
 
