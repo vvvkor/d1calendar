@@ -3,35 +3,38 @@
 var main = new(function() {
 
   "use strict";
-  this.q = 'input.calendar';
-  this.minWidth = 801;
-  this.format = 'd';//y=Y-m-d, d=d.m.Y, m=m/d Y
-  this.id = 'pick-date';
-  this.btnClass = 'pad hover';
-  this.hashNow = '#now';
-  this.hashCancel = '#cancel';
-  this.icons = [['date', '&darr;'], ['ok', '&bull;'], ['delete', '&times;']];
-  this.str = {
-    prev: '&lsaquo;',
-    next: '&rsaquo;',
-    prevy: '&laquo;',
-    nexty: '&raquo;',
-    close: '&times;',
-    now: '&bull;'
+  this.opt = {
+    qsCalendar: 'input.calendar',
+    minWidth: 801,
+    dateFormat: 'd', //y=Y-m-d, d=d.m.Y, m=m/d Y
+    pickerId: 'pick-date',
+    btnClass: 'pad hover',
+    hashNow: '#now',
+    hashCancel: '#cancel',
+    icons: [['svg-date', '&darr;'], ['svg-ok', '&bull;'], ['svg-delete', '&times;']],
+    strPrev: '&lsaquo;',
+    strNext: '&rsaquo;',
+    strPrevYear: '&laquo;',
+    strNextYear: '&raquo;',
+    strClose: '&times;',
+    strNow: '&bull;'
   };
 
   this.win = null;
   this.seq = 0;
 
   this.init = function(opt) {
-    if(window.innerWidth<this.minWidth) return;
-    this.win = this.ins('div', '', {id: this.id});
+    var i;
+    for(i in opt) this.opt[i] = opt[i];
+
+    if(window.innerWidth < this.opt.minWidth) return;
+    this.win = this.ins('div', '', {id: this.opt.pickerId});
     this.win.style.whiteSpace = 'nowrap';
     //this.win.style.display = 'none';
     this.win.className += ' hide toggle js-control';
     document.querySelector('body').appendChild(this.win);
     
-    var t = document.querySelectorAll(this.q);
+    var t = document.querySelectorAll(this.opt.qsCalendar);
     for (var i = 0; i < t.length; i++){
       this.preparePick(t[i]);
       //t[i].addEventListener('focus', this.openDialog.bind(this, t[i], null), false);
@@ -49,9 +52,9 @@ var main = new(function() {
     var pop = this.ins('div','',{className:'pop'},n,1);
     pop.appendChild(n);
     var ico = [];
-    for(var i in this.icons){
+    for(var i in this.opt.icons){
       this.ins('',' ',{},pop);
-      var ii = pop.appendChild(this.svg(this.icons[i][0],'text-n',this.icons[i][1]));
+      var ii = pop.appendChild(this.svg(this.opt.icons[i][0],'text-n',this.opt.icons[i][1]));
       ii.style.cursor = 'pointer';
       ico.push(ii);
     }
@@ -124,13 +127,13 @@ var main = new(function() {
     var ci = null;
     if(n.vTime){
         var p2 = this.ins('p', '', {className: 'c'});
-        var ph = this.btn('#prev-hour', this.str.prev, p2);
+        var ph = this.btn('#prev-hour', this.opt.strPrev, p2);
         var ch = this.ins('span', this.n(x.getHours()), {className: 'pad'}, p2);
-        var nh = this.btn('#next-hour', this.str.next, p2);
+        var nh = this.btn('#next-hour', this.opt.strNext, p2);
         this.ins('span', ':', {className: 'pad'}, p2);
-        var pi = this.btn('#prev-min', this.str.prev, p2);
+        var pi = this.btn('#prev-min', this.opt.strPrev, p2);
         var ci = this.ins('span', this.n(x.getMinutes()), {className: 'pad'}, p2);
-        var ni = this.btn('#next-min', this.str.next, p2);
+        var ni = this.btn('#next-min', this.opt.strNext, p2);
         ph.addEventListener('click', this.setTime.bind(this, ch, -1, 24), false);
         nh.addEventListener('click', this.setTime.bind(this, ch, +1, 24), false);
         pi.addEventListener('click', this.setTime.bind(this, ci, -1, 60), false);
@@ -138,19 +141,19 @@ var main = new(function() {
     }
    //buttons
     var y = x.getFullYear();
-    var m = x.getMonth() + 1;
+    var m = x.getMonth();
     var d = x.getDate();
     //var my = x.toString().split(/\s+/);
     //my = my[1] + ' ' + my[3];
-    var my = this.n(m) + '.' + y;
+    var my = this.n(m+1) + '.' + y;
     var p1 = this.ins('p', '', {className: 'c'}, this.win);
-    var now = this.btn(this.hashNow, this.str.now, p1);
-    var py = this.btn('#prev-year', this.str.prevy, p1);
-    var pm = this.btn('#prev-month', this.str.prev, p1);
+    var now = this.btn(this.opt.hashNow, this.opt.strNow, p1);
+    var py = this.btn('#prev-year', this.opt.strPrevYear, p1);
+    var pm = this.btn('#prev-month', this.opt.strPrev, p1);
     var cur = this.ins('span', my, {className: 'pad'}, p1);
-    var nm = this.btn('#next-month', this.str.next, p1);
-    var ny = this.btn('#next-year', this.str.nexty, p1);
-    var close = this.btn(this.hashCancel, this.str.close, p1);
+    var nm = this.btn('#next-month', this.opt.strNext, p1);
+    var ny = this.btn('#next-year', this.opt.strNextYear, p1);
+    var close = this.btn(this.opt.hashCancel, this.opt.strClose, p1);
     this.ins('hr', '', {}, this.win);
     now.addEventListener('click', this.closeDialog.bind(this, n, true, ch, ci), false);
     close.addEventListener('click', this.closeDialog.bind(this, n, null, null, null), false);
@@ -208,7 +211,7 @@ var main = new(function() {
     var d = this.n(x.getDate());
     var m = this.n(x.getMonth()+1);
     var y = x.getFullYear();
-    if(!f) f = this.format;
+    if(!f) f = this.opt.dateFormat;
     return (f=='m' ? m + '/' + d + ' ' + y : (f=='d' ? d + '.' + m + '.' + y : y + '-' + m + '-' + d))
       + (t ? ' '+this.n(x.getHours())+':'+this.n(x.getMinutes()) : '');
   }
@@ -216,7 +219,7 @@ var main = new(function() {
   //common
   
   this.btn = function(h, s, p){
-    return this.ins('a', s, {href: h, className: this.btnClass}, p);
+    return this.ins('a', s, {href: h, className: this.opt.btnClass}, p);
   }
   
   //after: 0 = appendChild, 1 = siblingAfter
@@ -230,8 +233,8 @@ var main = new(function() {
   }
 
   this.svg = function(i,c,alt){
-    if(!document.getElementById('svg-' + i)) return this.ins('span', alt, {className: c || ''});
-    return this.ins('span', '<svg class="icon ' + (c || '') + '" width="24" height="24"><use xlink:href="#svg-' + i + '"></use></svg>');
+    if(!document.getElementById(i)) return this.ins('span', alt, {className: c || ''});
+    return this.ins('span', '<svg class="icon ' + (c || '') + '" width="24" height="24"><use xlink:href="#' + i + '"></use></svg>');
   }
 
 })();
