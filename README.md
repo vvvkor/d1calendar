@@ -51,7 +51,7 @@ Default: ``"d"``
 
 ### pickerId
 
-``Id`` of the popup date picker element  
+``Id`` of the popup date picker element.  
 Default: ``"pick-date"``
 
 ### btnClass
