@@ -9,19 +9,24 @@ Replacement for standard HTML inputs: ``date``, ``datetime-local``.
 npm install d1calendar
 ```
 
-## Usage
+## Features
 
-On page load call
-```
-d1dialog.init(options);
-```
-
-* Add ``calendar`` class to replace standard HTML ``date`` and ``datetime-local`` inputs with ``text`` input and custom dropdown calendar.
+* Replaces standard HTML ``date`` and ``datetime-local`` inputs with ``text`` input and custom dropdown calendar.
 * Optionally keeps standard inputs for small-screen devices (``minWidth`` option).
 * Date ``format`` option: ``d.m.Y``, ``Y-m-d``, ``m/d Y``.
 * Validates ``min`` and ``max`` dates.
 * Default date for empty field in ``data-def`` attribute.
 * Customizable icons.
+
+
+## Usage
+
+In your markup, add ``calendar`` class to ``date`` and ``datetime-local`` inputs which should be replaced.
+
+On page load call:
+```
+d1dialog.init(options);
+```
 
 ## Options
 
