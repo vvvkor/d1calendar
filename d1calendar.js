@@ -21,7 +21,6 @@ var main = new(function() {
   };
 
   this.win = null;
-  this.seq = 0;
 
   this.init = function(opt) {
     var i;
