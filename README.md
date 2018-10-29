@@ -24,7 +24,7 @@ In your markup, add ``calendar`` class to ``date`` and ``datetime-local`` inputs
 
 On page load call:
 ```
-d1dialog.init(options);
+d1calendar.init(options);
 ```
 
 ## Options
