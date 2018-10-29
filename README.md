@@ -3,12 +3,6 @@
 Replacement for standard HTML inputs: ``date``, ``datetime-local``.  
 [Demo & Docs](http://vadimkor.ru/projects/d1#calendar)
 
-## Install
-
-```
-npm install d1calendar
-```
-
 ## Features
 
 * Replaces standard HTML ``date`` and ``datetime-local`` inputs with ``text`` input and custom dropdown calendar.
@@ -18,6 +12,11 @@ npm install d1calendar
 * Default date for empty field in ``data-def`` attribute.
 * Customizable icons.
 
+## Install
+
+```
+npm install d1calendar
+```
 
 ## Usage
 
