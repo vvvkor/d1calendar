@@ -20,12 +20,12 @@ npm install d1calendar
 
 ## Usage
 
-In your markup, add ``calendar`` class to ``date`` and ``datetime-local`` inputs which should be replaced.
-
 On page load call:
 ```
 d1calendar.init(options);
 ```
+
+In your markup, add ``calendar`` class to ``date`` and ``datetime-local`` inputs which should be replaced.
 
 ## Options
 
