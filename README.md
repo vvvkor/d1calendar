@@ -32,7 +32,7 @@ d1dialog.init(options);
 ### qsCalendar
 
 Query selector of inputs to replace.  
-Default: ``input.calendar``
+Default: ``"input.calendar"``
 
 ### minWidth
 
@@ -43,31 +43,31 @@ Default: ``801``
 
 Date format, one of following:
 
-* ``d`` for ``d.m.Y``
-* ``m`` for ``m/d Y``
-* ``y`` for ``Y-m-d``
+* ``"d"`` for ``d.m.Y``
+* ``"m"`` for ``m/d Y``
+* ``"y"`` for ``Y-m-d``
 
-Default: ``d``
+Default: ``"d"``
 
 ### pickerId
 
 ``Id`` of the popup date picker element  
-Default: ``pick-date``
+Default: ``"pick-date"``
 
 ### btnClass
 
 CSS class of buttons.  
-Default: ``pad hover``
+Default: ``"pad hover"``
 
 ### hashNow
 
 Hash of "now" link.  
-Default: ``#now``
+Default: ``"#now"``
 
 ### hashCancel
 
 Hash of "close" link.  
-Default: ``#cancel``
+Default: ``"#cancel"``
 
 ### icons
 
@@ -81,37 +81,37 @@ Each icon is presented as array of 2 elements:
  1. ``id`` of SVG ``symbol`` to use as the icon, or empty string
  2. alternative text to show instead of icon if icon symbol is not set or is not found on page
 
-Default: ``[['svg-date', '&darr;'], ['svg-ok', '&bull;'], ['svg-delete', '&times;']]``
+Default: ``[["svg-date", "&darr;"], ["svg-ok", "&bull;"], ["svg-delete", "&times;"]]``
 
 ### strPrev
 
 Label on "previous" button.  
-Default: ``&lsaquo;``
+Default: ``"&lsaquo;"``
 
 ### strNext
 
 Label on "next" button.  
-Default: ``&rsaquo;``
+Default: ``"&rsaquo;"``
 
 ### strPrevYear
 
 Label on "previous year" button.  
-Default: ``&laquo;``
+Default: ``"&laquo;"``
 
 ### strNextYear
 
 Label on "next year" button.  
-Default: ``&raquo;``
+Default: ``"&raquo;"``
 
 ### strClose
 
 Label on "close" button.  
-Default: ``&times;``
+Default: ``"&times;"``
 
 ### strNow
 
 Label on "now" button.  
-Default: ``&bull;``
+Default: ``"&bull;"``
 
 
 ## Browser Support
