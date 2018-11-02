@@ -5,20 +5,20 @@ var main = new(function() {
   "use strict";
   
   this.opt = {
-    qsCalendar: 'input.calendar',
-    minWidth: 801,
+    cBtn: 'pad hover',
     dateFormat: 'd', //y=Y-m-d, d=d.m.Y, m=m/d Y
-    pickerId: 'pick-date',
-    btnClass: 'pad hover',
-    hashNow: '#now',
     hashCancel: '#cancel',
+    hashNow: '#now',
     icons: [['svg-date', '&darr;'], ['svg-ok', '&bull;'], ['svg-delete', '&times;']],
-    strPrev: '&lsaquo;',
-    strNext: '&rsaquo;',
-    strPrevYear: '&laquo;',
-    strNextYear: '&raquo;',
+    idPicker: 'pick-date',
+    minWidth: 801,
+    qsCalendar: 'input.calendar',
     strClose: '&times;',
-    strNow: '&bull;'
+    strNext: '&rsaquo;',
+    strNextYear: '&raquo;',
+    strNow: '&bull;',
+    strPrev: '&lsaquo;',
+    strPrevYear: '&laquo;'
   };
 
   this.win = null;
@@ -28,7 +28,7 @@ var main = new(function() {
     for(i in opt) this.opt[i] = opt[i];
 
     if(window.innerWidth < this.opt.minWidth) return;
-    this.win = d1.ins('div', '', {id: this.opt.pickerId, className: 'pad hide toggle js-control'});
+    this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'pad hide toggle js-control'});
     this.win.style.whiteSpace = 'nowrap';
     //this.win.style.display = 'none';
     document.querySelector('body').appendChild(this.win);
@@ -216,7 +216,7 @@ var main = new(function() {
   }
   
   this.btn = function(h, s, p){
-    return d1.ins('a', s, {href: h, className: this.opt.btnClass}, p);
+    return d1.ins('a', s, {href: h, className: this.opt.cBtn}, p);
   }
   
 })();

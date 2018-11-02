@@ -30,15 +30,10 @@ In your markup, add ``calendar`` class to ``date`` and ``datetime-local`` inputs
 
 ## Options
 
-### qsCalendar
+### cBtn
 
-Query selector of inputs to replace.  
-Default: ``"input.calendar"``
-
-### minWidth
-
-Minimum window width for which inputs should be replaced.  
-Default: ``801``
+CSS class of buttons.  
+Default: ``"pad hover"``
 
 ### dateFormat
 
@@ -50,25 +45,15 @@ Date format, one of following:
 
 Default: ``"d"``
 
-### pickerId
+### hashCancel
 
-``Id`` of the popup date picker element.  
-Default: ``"pick-date"``
-
-### btnClass
-
-CSS class of buttons.  
-Default: ``"pad hover"``
+Hash of "close" link.  
+Default: ``"#cancel"``
 
 ### hashNow
 
 Hash of "now" link.  
 Default: ``"#now"``
-
-### hashCancel
-
-Hash of "close" link.  
-Default: ``"#cancel"``
 
 ### icons
 
@@ -84,35 +69,50 @@ Each icon is presented as array of 2 elements:
 
 Default: ``[["svg-date", "&darr;"], ["svg-ok", "&bull;"], ["svg-delete", "&times;"]]``
 
-### strPrev
+### idPicker
 
-Label on "previous" button.  
-Default: ``"&lsaquo;"``
+``Id`` of the popup date picker element.  
+Default: ``"pick-date"``
 
-### strNext
+### minWidth
 
-Label on "next" button.  
-Default: ``"&rsaquo;"``
+Minimum window width for which inputs should be replaced.  
+Default: ``801``
 
-### strPrevYear
+### qsCalendar
 
-Label on "previous year" button.  
-Default: ``"&laquo;"``
-
-### strNextYear
-
-Label on "next year" button.  
-Default: ``"&raquo;"``
+Query selector of inputs to replace.  
+Default: ``"input.calendar"``
 
 ### strClose
 
 Label on "close" button.  
 Default: ``"&times;"``
 
+### strNext
+
+Label on "next" button.  
+Default: ``"&rsaquo;"``
+
+### strNextYear
+
+Label on "next year" button.  
+Default: ``"&raquo;"``
+
 ### strNow
 
 Label on "now" button.  
 Default: ``"&bull;"``
+
+### strPrev
+
+Label on "previous" button.  
+Default: ``"&lsaquo;"``
+
+### strPrevYear
+
+Label on "previous year" button.  
+Default: ``"&laquo;"``
 
 
 ## Browser Support
