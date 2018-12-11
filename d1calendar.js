@@ -1,3 +1,5 @@
+//uses d1
+
 //[type="date|datetime-local"](.datetime).calendar[min][max][data-def]
 (function(){
 var main = new(function() {
@@ -9,16 +11,10 @@ var main = new(function() {
     dateFormat: 'd', //y=Y-m-d, d=d.m.Y, m=m/d Y
     hashCancel: '#cancel',
     hashNow: '#now',
-    icons: [['svg-date', '&darr;'], ['svg-ok', '&bull;'], ['svg-delete', '&times;']],
+    icons: ['date', 'now', 'delete'],//[['svg-date', '&darr;'], ['svg-ok', '&bull;'], ['svg-delete', '&times;']],
     idPicker: 'pick-date',
     minWidth: 801,
-    qsCalendar: 'input.calendar',
-    strClose: '&times;',
-    strNext: '&rsaquo;',
-    strNextYear: '&raquo;',
-    strNow: '&bull;',
-    strPrev: '&lsaquo;',
-    strPrevYear: '&laquo;'
+    qsCalendar: 'input.calendar'
   };
 
   this.win = null;
@@ -28,9 +24,9 @@ var main = new(function() {
     for(i in opt) this.opt[i] = opt[i];
 
     if(window.innerWidth < this.opt.minWidth) return;
-    this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'pad hide toggle js-control'});
+    this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'toggle pad'});
     this.win.style.whiteSpace = 'nowrap';
-    //this.win.style.display = 'none';
+    d1.setState(this.win, 0);
     document.querySelector('body').appendChild(this.win);
     
     var t = document.querySelectorAll(this.opt.qsCalendar);
@@ -45,15 +41,15 @@ var main = new(function() {
   
   this.preparePick = function(n){
     n.vTime = (n.type == 'datetime-local' || n.classList.contains('datetime'));
-    n.classList.add('unesc');
     n.type = 'text';
     n.autocomplete = 'off';
-    var pop = d1.ins('div','',{className:'pop'},n,1);
+    if(n.value) n.value = this.fmt(this.parse(n.value), 0, n.vTime);
+    var pop = d1.ins('div','',{className:'pop wide'},n,1);
     pop.appendChild(n);
     var ico = [];
     for(var i in this.opt.icons){
       d1.ins('', ' ', {}, pop);
-      var ii = pop.appendChild(d1.svg(this.opt.icons[i][0],'text-n',this.opt.icons[i][1]));
+      var ii = pop.appendChild(d1.i(this.opt.icons[i]));
       ii.style.cursor = 'pointer';
       ico.push(ii);
     }
@@ -72,8 +68,7 @@ var main = new(function() {
     e.stopPropagation();
     //n.parentNode.insertBefore(this.win, n.nextSibling);
     n.parentNode.appendChild(this.win);
-    //this.win.style.display = 'block';
-    this.win.classList.add('js-show');
+    d1.setState(this.win, 1);
     this.win.style.top = (n.offsetTop + n.offsetHeight) + 'px';
     this.win.style.left = (n.offsetLeft) + 'px';
     this.build(n, d || n.value);
@@ -89,8 +84,7 @@ var main = new(function() {
       }
       n.focus();
     }
-    //this.win.style.display = 'none';
-    this.win.classList.remove('js-show');
+    d1.setState(this.win, 0);
   }
   
   this.n = function(v, l){
@@ -126,13 +120,13 @@ var main = new(function() {
     var ci = null;
     if(n.vTime){
         var p2 = d1.ins('p', '', {className: 'c'});
-        var ph = this.btn('#prev-hour', this.opt.strPrev, p2);
+        var ph = this.btn('#prev-hour', d1.i('prev'), p2);
         var ch = d1.ins('span', this.n(x.getHours()), {className: 'pad'}, p2);
-        var nh = this.btn('#next-hour', this.opt.strNext, p2);
+        var nh = this.btn('#next-hour', d1.i('next'), p2);
         d1.ins('span', ':', {className: 'pad'}, p2);
-        var pi = this.btn('#prev-min', this.opt.strPrev, p2);
+        var pi = this.btn('#prev-min', d1.i('prev'), p2);
         var ci = d1.ins('span', this.n(x.getMinutes()), {className: 'pad'}, p2);
-        var ni = this.btn('#next-min', this.opt.strNext, p2);
+        var ni = this.btn('#next-min', d1.i('next'), p2);
         ph.addEventListener('click', this.setTime.bind(this, ch, -1, 24), false);
         nh.addEventListener('click', this.setTime.bind(this, ch, +1, 24), false);
         pi.addEventListener('click', this.setTime.bind(this, ci, -1, 60), false);
@@ -146,13 +140,13 @@ var main = new(function() {
     //my = my[1] + ' ' + my[3];
     var my = this.n(m+1) + '.' + y;
     var p1 = d1.ins('p', '', {className: 'c'}, this.win);
-    var now = this.btn(this.opt.hashNow, this.opt.strNow, p1);
-    var py = this.btn('#prev-year', this.opt.strPrevYear, p1);
-    var pm = this.btn('#prev-month', this.opt.strPrev, p1);
+    var now = this.btn(this.opt.hashNow, d1.i('now'), p1);
+    var py = this.btn('#prev-year', d1.i('prev2'), p1);
+    var pm = this.btn('#prev-month', d1.i('prev'), p1);
     var cur = d1.ins('span', my, {className: 'pad'}, p1);
-    var nm = this.btn('#next-month', this.opt.strNext, p1);
-    var ny = this.btn('#next-year', this.opt.strNextYear, p1);
-    var close = this.btn(this.opt.hashCancel, this.opt.strClose, p1);
+    var nm = this.btn('#next-month', d1.i('next'), p1);
+    var ny = this.btn('#next-year', d1.i('next2'), p1);
+    var close = this.btn(this.opt.hashCancel, d1.i('close'), p1);
     d1.ins('hr', '', {}, this.win);
     now.addEventListener('click', this.closeDialog.bind(this, n, true, ch, ci), false);
     close.addEventListener('click', this.closeDialog.bind(this, n, null, null, null), false);

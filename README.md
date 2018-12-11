@@ -63,11 +63,7 @@ Icons to show after input. Array of up to 3 icons, used to:
  2. set current date (and time)
  3. clear input value
 
-Each icon is presented as array of 2 elements:
- 1. ``id`` of SVG ``symbol`` to use as the icon, or empty string
- 2. alternative text to show instead of icon if icon symbol is not set or is not found on page
-
-Default: ``[["svg-date", "&darr;"], ["svg-ok", "&bull;"], ["svg-delete", "&times;"]]``
+Default: ``["date", "now", "delete"]``
 
 ### idPicker
 
@@ -83,36 +79,6 @@ Default: ``801``
 
 Query selector of inputs to replace.  
 Default: ``"input.calendar"``
-
-### strClose
-
-Label on "close" button.  
-Default: ``"&times;"``
-
-### strNext
-
-Label on "next" button.  
-Default: ``"&rsaquo;"``
-
-### strNextYear
-
-Label on "next year" button.  
-Default: ``"&raquo;"``
-
-### strNow
-
-Label on "now" button.  
-Default: ``"&bull;"``
-
-### strPrev
-
-Label on "previous" button.  
-Default: ``"&lsaquo;"``
-
-### strPrevYear
-
-Label on "previous year" button.  
-Default: ``"&laquo;"``
 
 
 ## Browser Support
