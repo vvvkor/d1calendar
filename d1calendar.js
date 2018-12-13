@@ -1,4 +1,5 @@
-//uses d1
+/*! d1calendar https://github.com/vvvkor/d1calendar */
+/* Replacement of standard HTML inputs: date, datetime-local */
 
 //[type="date|datetime-local"](.datetime).calendar[min][max][data-def]
 (function(){
