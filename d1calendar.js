@@ -2,6 +2,7 @@
 /* Replacement of standard HTML inputs: date, datetime-local */
 
 //[type="date|datetime-local"](.datetime).calendar[min][max][data-def]
+if(typeof module !== "undefined") var d1 = require('d1css');
 (function(){
 var main = new(function() {
 
