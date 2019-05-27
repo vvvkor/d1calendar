@@ -2,7 +2,7 @@
 
 Add-on for [d1](https://github.com/vvvkor/d1).  
 Replacement of standard HTML inputs: ``date``, ``datetime-local``.  
-[Demo & Docs](http://vadimkor.ru/projects/d1#calendar)
+[Demo & Docs](https://vvvkor.github.io/d1#calendar)
 
 ## Features
 
