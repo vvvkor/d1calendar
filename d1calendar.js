@@ -215,6 +215,8 @@ var main = new(function() {
     return d1.ins('a', s, {href: h, className: this.opt.cBtn}, p);
   }
   
+  d1.plug(this);
+
 })();
 
   if(typeof module !== "undefined") module.exports = main;
