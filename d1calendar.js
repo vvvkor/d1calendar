@@ -8,6 +8,8 @@ var main = new(function() {
 
   "use strict";
   
+  this.name = 'calendar';
+  
   this.opt = {
     cBtn: 'pad hover',
     dateFormat: 'd', //y=Y-m-d, d=d.m.Y, m=m/d Y
