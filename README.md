@@ -80,6 +80,10 @@ Default: ``801``
 Query selector of inputs to replace.  
 Default: ``"input.calendar"``
 
+### stepMinutes
+
+Minutes step for datetime input.  
+Default: ``1``
 
 ## Browser Support
 
