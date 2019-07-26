@@ -49,7 +49,7 @@ var main = new(function() {
     n.type = 'text';
     n.autocomplete = 'off';
     if(n.value) n.value = this.fmt(this.parse(n.value), 0, n.vTime);
-    var pop = d1.ins('div','',{className:'pop wide'},n,1); //''
+    var pop = d1.ins('div','',{className:'pop wide l'},n,1); //''
     pop.appendChild(n);
     var ico = [];
     for(var i in this.opt.icons){
