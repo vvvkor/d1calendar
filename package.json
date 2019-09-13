@@ -1,6 +1,6 @@
 {
   "name": "d1calendar",
-  "version": "1.2.9",
+  "version": "1.2.11",
   "description": "Replacement of standard HTML date inputs",
   "main": "d1calendar.js",
   "scripts": {

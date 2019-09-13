@@ -11,6 +11,7 @@ Replacement of standard HTML inputs: ``date``, ``datetime-local``.
 * Date ``format`` option: ``d.m.Y``, ``Y-m-d``, ``m/d Y``.
 * Validates ``min`` and ``max`` dates.
 * Default date for empty field in ``data-def`` attribute.
+* Set ``data-modal`` attribute to override ``showModal`` option.
 * Customizable icons.
 
 ## Install
@@ -79,6 +80,11 @@ Default: ``801``
 
 Query selector of inputs to replace.  
 Default: ``"input.calendar"``
+
+### showModal
+
+Show calendar in popup (``0``) or in modal (``1``).  
+Default: ``0``
 
 ### stepMinutes
 

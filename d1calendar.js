@@ -11,7 +11,7 @@ var main = new(function() {
   this.name = 'calendar';
   
   this.opt = {
-    cBtn: 'pad hover',
+    cBtn: 'pad c hover',
     dateFormat: 'd', //y=Y-m-d, d=d.m.Y, m=m/d Y
     hashCancel: '#cancel',
     hashNow: '#now',
@@ -19,6 +19,7 @@ var main = new(function() {
     idPicker: 'pick-date',
     minWidth: 801,
     qsCalendar: 'input.calendar',
+    showModal: 0,
     stepMinutes: 1
   };
 
@@ -29,9 +30,9 @@ var main = new(function() {
     for(i in opt) this.opt[i] = opt[i];
 
     if(window.innerWidth < this.opt.minWidth) return;
-    this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'toggle pad'});//dlg hide pad
+    this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'hide'});
     this.win.style.whiteSpace = 'nowrap';
-    d1.setState(this.win, 0);
+    this.toggle(0);
     document.querySelector('body').appendChild(this.win);
     
     var t = document.querySelectorAll(this.opt.qsCalendar);
@@ -42,6 +43,16 @@ var main = new(function() {
       //t[i].addEventListener('blur', this.validate.bind(this, t[i], 0), false);
       t[i].addEventListener('input', this.validate.bind(this, t[i], 0), false);
     }
+    d1.b('', [window], 'keydown', this.key.bind(this)); 
+  }
+  
+  this.toggle = function(on, n){
+    if(n){
+      var m = n.getAttribute('data-modal');
+      m = m ? parseInt(m,10) : this.opt.showModal;
+      this.win.className = m ? 'dlg hide pad' : 'toggle pad';
+    }
+    d1.setState(this.win, on);
   }
   
   this.preparePick = function(n){
@@ -74,9 +85,7 @@ var main = new(function() {
     e.stopPropagation();
     //n.parentNode.insertBefore(this.win, n.nextSibling);
     n.parentNode.appendChild(this.win);
-    d1.setState(this.win, 1);
-//    this.win.style.top = (n.offsetTop + n.offsetHeight) + 'px';
-//    this.win.style.left = (n.offsetLeft) + 'px';
+    this.toggle(1, n);
     this.build(n, d || n.value);
   }
 
@@ -87,7 +96,7 @@ var main = new(function() {
       this.setValue(n, d, h, m);
       n.focus();
     }
-    d1.setState(this.win, 0);
+    this.toggle(0);
   }
   
   this.setValue = function(n, d, h, m){
@@ -118,7 +127,6 @@ var main = new(function() {
     n.setCustomValidity((re || n.value=='') ? '' : this.errLimits(n));
     n.checkValidity();
     n.reportValidity();
-    //console.log(re ? '' : this.errLimits(n));
   }
   
   this.build = function(n, x){
@@ -168,24 +176,27 @@ var main = new(function() {
     //dates
     var days = (new Date(y, m+1, 0)).getDate();//days in month
     var skip = ((new Date(y, m, 1)).getDay() + 6) % 7;//skip weekdays
+    var max = Math.ceil((skip + days) / 7) * 7 - skip;
     var c, v, vv, sel, today, off, wd;
     var cd = this.fmt(new Date());
     var xd = this.fmt(x);
-    for(var i=-skip+1; i<=days; i++){
+    var row;
+    for(var i=-skip+1; i<=max; i++){
       wd = ((skip+i-1)%7)+1;
-      if(i<1) c = d1.ins('a', '', {className: 'pad c'}, this.win);
+      if(wd == 1) row = d1.ins('div', '', {className:'row'}, this.win);
+      if(i<1 || i>days) c = d1.ins('a', '', {className: 'pad c center'}, row);
       else{
         v = this.fmt(x, i);
         vv = this.fmt(x, i, 0, 'y');
         sel = (v == xd);
         today = false;//(v == cd);
         off = (min && vv<min) || (max && vv>max);
-        c = d1.ins('a', i, {href: '#' + i, className: 'pad c ' + (sel ? 'bg-w ' : '') + (today ? 'bg-y ' : '') + (off ? 'text-n ' : 'hover ') + (wd>5 ? 'text-e ' : '')}, this.win);
-        if(!off) c.addEventListener('click', this.closeDialog.bind(this, n, v, ch, ci), false);
+        c = d1.ins('a', i, {className: 'pad c center ' + (sel ? 'bg-w ' : '') + (today ? 'bg-y ' : '') + (off ? 'text-n ' : 'hover ') + (wd>5 ? 'text-e ' : '')}, row);
+        if(!off){
+          c.href = '#' + i;
+          c.addEventListener('click', this.closeDialog.bind(this, n, v, ch, ci), false);
+        }
       }
-      c.style.minWidth = '3em';
-      c.style.padding = '.5em';
-      if(wd == 7) d1.ins('br', '', {}, this.win);
     }
     if(n.vTime){
       d1.ins('hr', '', {}, this.win);
@@ -228,6 +239,10 @@ var main = new(function() {
     return d1.ins('a', s, {href: h, className: this.opt.cBtn}, p);
   }
   
+   this.key = function(n, e) {
+     if (e.keyCode==27) if (d1.getState(this.win)) this.toggle(0);
+  } 
+
   d1.plug(this);
 
 })();
