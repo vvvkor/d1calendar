@@ -32,8 +32,9 @@ var main = new(function() {
     if(window.innerWidth < this.opt.minWidth) return;
     this.win = d1.ins('div', '', {id: this.opt.idPicker, className: 'hide'});
     this.win.style.whiteSpace = 'nowrap';
+    d1.b('',[this.win],'click',function(n,e){ e.stopPropagation(); });
     this.toggle(0);
-    document.querySelector('body').appendChild(this.win);
+    //document.querySelector('body').appendChild(this.win);
     
     var t = document.querySelectorAll(this.opt.qsCalendar);
     for (var i = 0; i < t.length; i++){
@@ -50,7 +51,10 @@ var main = new(function() {
     if(n){
       var m = n.getAttribute('data-modal');
       m = m ? parseInt(m,10) : this.opt.showModal;
-      this.win.className = m ? 'dlg hide pad' : 'toggle pad';
+      if(on){
+        this.win.className = m ? 'dlg hide pad' : 'toggle pad';
+        (m ? document.body : n.parentNode).appendChild(this.win);
+      }
     }
     d1.setState(this.win, on);
   }
@@ -84,7 +88,7 @@ var main = new(function() {
   this.openDialog = function(n, d, e){
     e.stopPropagation();
     //n.parentNode.insertBefore(this.win, n.nextSibling);
-    n.parentNode.appendChild(this.win);
+    //n.parentNode.appendChild(this.win);
     this.toggle(1, n);
     this.build(n, d || n.value);
   }
