@@ -20,6 +20,7 @@ var main = new(function() {
     minWidth: 801,
     qsCalendar: 'input.calendar',
     showModal: 0,
+    sizeLimit: 801,
     stepMinutes: 1
   };
 
@@ -49,8 +50,12 @@ var main = new(function() {
   
   this.toggle = function(on, n){
     if(n){
-      var m = n.getAttribute('data-modal');
-      m = m ? parseInt(m,10) : this.opt.showModal;
+      var m;
+      if(Math.min(window.innerWidth, window.innerHeight) < this.opt.sizeLimit) m = 1;
+      else{
+        m = n.getAttribute('data-modal');
+        m = m ? parseInt(m,10) : this.opt.showModal;
+      }
       if(on){
         this.win.className = m ? 'dlg hide pad' : 'toggle pad';
         (m ? document.body : n.parentNode).appendChild(this.win);

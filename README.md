@@ -86,6 +86,11 @@ Default: ``"input.calendar"``
 Show calendar in popup (``0``) or in modal (``1``).  
 Default: ``0``
 
+### sizeLimit
+
+Minimum window width for which calendar is shown in dropdow (otherwise in modal).  
+Default: ``801``
+
 ### stepMinutes
 
 Minutes step for datetime input.  
