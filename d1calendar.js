@@ -155,10 +155,10 @@ var main = new(function() {
         var pi = this.btn('#prev-min', d1.i('prev'), p2);
         var ci = d1.ins('span', this.n(x.getMinutes()), {className: 'pad'}, p2);
         var ni = this.btn('#next-min', d1.i('next'), p2);
-        ph.addEventListener('click', this.setTime.bind(this, ch, -1, 24), false);
-        nh.addEventListener('click', this.setTime.bind(this, ch, +1, 24), false);
-        pi.addEventListener('click', this.setTime.bind(this, ci, -this.opt.stepMinutes, 60), false);
-        ni.addEventListener('click', this.setTime.bind(this, ci, +this.opt.stepMinutes, 60), false);
+        ph.addEventListener('click', this.setTime.bind(this, n, ch, ci, -1, 'h'), false);
+        nh.addEventListener('click', this.setTime.bind(this, n, ch, ci, +1, 'h'), false);
+        pi.addEventListener('click', this.setTime.bind(this, n, ch, ci, -this.opt.stepMinutes, 'i'), false);
+        ni.addEventListener('click', this.setTime.bind(this, n, ch, ci, +this.opt.stepMinutes, 'i'), false);
     }
    //buttons
     var y = x.getFullYear();
@@ -213,13 +213,16 @@ var main = new(function() {
     }
   }
   
-  this.setTime = function(n, step, max, e){
+  this.setTime = function(n, ch, ci, step, item, e){
+    var max = (item == 'h') ? 24 : 60;
+    var m = (item == 'h') ? ch : ci;
     e.preventDefault();
     //var v = (parseInt(n.textContent, 10) + step + max) % max;
-    var v = parseInt(n.textContent, 10);
+    var v = parseInt(m.textContent, 10);
     var x = v % Math.abs(step);
     v += x ? (step>0 ? step-x : -x) : max+step;
-    n.textContent = this.n(v % max);
+    m.textContent = this.n(v % max);
+    this.setValue(n, this.fmt(this.parse(n.value)), ch, ci);
   }
 
   this.parse = function(d){
