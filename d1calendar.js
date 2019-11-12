@@ -58,7 +58,7 @@ var main = new(function() {
       }
       if(on){
         this.win.className = m ? 'dlg hide pad' : 'toggle pad';
-        (m ? document.body : n.parentNode).appendChild(this.win);
+        (m ? document.body : n.thePop).appendChild(this.win);
       }
     }
     d1.setState(this.win, on);
@@ -69,12 +69,15 @@ var main = new(function() {
     n.type = 'text';
     n.autocomplete = 'off';
     if(n.value) n.value = this.fmt(this.parse(n.value), 0, n.vTime);
-    var pop = d1.ins('div','',{className:'pop wide l'},n,1); //''
-    pop.appendChild(n);
+    var pop = d1.ins('div','',{className:'pop wide l'}, n, -1); //''
+    pop.style.verticalAlign = 'bottom';
+    //pop.appendChild(n);
+    n.thePop = pop;
     var ico = [];
+    var ic = d1.ins('span', '', {}, n, 1);//icons container
     for(var i in this.opt.icons){
-      d1.ins('', ' ', {}, pop);
-      var ii = pop.appendChild(d1.i(this.opt.icons[i]));
+      d1.ins('', ' ', {}, ic);
+      var ii = ic.appendChild(d1.i(this.opt.icons[i]));
       ii.style.cursor = 'pointer';
       ico.push(ii);
     }
