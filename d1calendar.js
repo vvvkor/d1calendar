@@ -88,6 +88,10 @@ var main = new(function() {
   
   this.switchMonth = function(n, y, m, d, ch, ci, e){
     e.preventDefault();
+    if(d>28){
+      var days = (new Date(y, m+1, 0)).getDate();//days in month
+      d = Math.min(d, days);
+    }
     var h = ch ? parseInt(ch.textContent, 10) : 0;
     var i = ci ? parseInt(ci.textContent, 10) : 0;
     this.openDialog(n, new Date(y, m, d, h, i), e);
