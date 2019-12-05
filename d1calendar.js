@@ -21,7 +21,8 @@ var main = new(function() {
     qsCalendar: 'input.calendar',
     showModal: 0,
     sizeLimit: 801,
-    stepMinutes: 1
+    stepMinutes: 1,
+    inPop: 0
   };
 
   this.win = null;
@@ -69,10 +70,11 @@ var main = new(function() {
     n.type = 'text';
     n.autocomplete = 'off';
     if(n.value) n.value = this.fmt(this.parse(n.value), 0, n.vTime);
-    var pop = d1.ins('div','',{className:'pop wide l'}, n, -1); //''
-    pop.style.verticalAlign = 'bottom';
+    var pop = d1.ins('div','',{className:'pop l'}, n, -1); //''
+    if(!this.opt.inPop) pop.style.verticalAlign = 'bottom';
     //pop.appendChild(n);
     n.thePop = pop;
+    if(this.opt.inPop) pop.appendChild(n);
     var ico = [];
     var ic = d1.ins('span', '', {}, n, 1);//icons container
     for(var i in this.opt.icons){
