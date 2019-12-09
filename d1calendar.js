@@ -57,11 +57,11 @@ var main = new(function() {
       if(on){
         this.win.className = m ? 'dlg hide pad' : 'toggle pad';
         (m ? document.body : n.thePop).appendChild(this.win);
-        if(!m) d1.popFrom(n, this.win, 450, 350);
-        else{
+        if(m){
           var s = this.win.style;
           s.left = s.right = s.top = s.bottom = '';
         }
+        this.win.vRel = m ? null : n;
       }
     }
     d1.setState(this.win, on);
