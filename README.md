@@ -1,5 +1,12 @@
 # d1calendar
 
+**DEPRECATED**
+
+This is no longer maintained.  
+Please consider using [d1-web](https://github.com/vvvkor/d1-web) instead.
+
+---
+
 Add-on for [d1](https://github.com/vvvkor/d1).  
 Replacement of standard HTML inputs: ``date``, ``datetime-local``.  
 [Demo & Docs](https://vvvkor.github.io/d1#calendar)
